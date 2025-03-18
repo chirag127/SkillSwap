@@ -234,8 +234,27 @@ const AppNavigator = () => {
         return null; // Or a loading screen
     }
 
+    // Configure deep linking
+    const linking = {
+        prefixes: ["skillswap://", "https://skillswap.com"],
+        config: {
+            screens: {
+                Login: "login",
+                Register: "register",
+                ForgotPassword: "forgot-password",
+                ResetPassword: {
+                    path: "reset-password/:resetToken",
+                    parse: {
+                        resetToken: (resetToken) => resetToken,
+                    },
+                },
+                // Add other deep link configurations as needed
+            },
+        },
+    };
+
     return (
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
             {userToken !== null ? <AppTabs /> : <AuthStack />}
         </NavigationContainer>
     );

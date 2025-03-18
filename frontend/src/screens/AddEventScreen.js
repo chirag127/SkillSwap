@@ -3,9 +3,6 @@ import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 
 const AddEventScreen = ({ navigation }) => {
-    // This is a placeholder implementation
-    // In a real app, this would be fully implemented
-
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState("");

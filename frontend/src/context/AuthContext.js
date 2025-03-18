@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }) => {
                 { email }
             );
             setIsLoading(false);
-            return { success: true, data: response.data.data };
+            return { success: true, message: response.data.message };
         } catch (error) {
             setIsLoading(false);
             const message =

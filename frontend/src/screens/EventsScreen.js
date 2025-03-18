@@ -9,9 +9,6 @@ import {
 } from "react-native-paper";
 
 const EventsScreen = ({ navigation }) => {
-    // This is a placeholder implementation
-    // In a real app, this would fetch data from the API
-
     const [loading, setLoading] = useState(true);
     const [events, setEvents] = useState([]);
 

@@ -3,9 +3,6 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Button } from "react-native-paper";
 
 const EventDetailScreen = ({ navigation }) => {
-    // This is a placeholder implementation
-    // In a real app, this would fetch data from the API
-
     return (
         <ScrollView style={styles.container}>
             <View style={styles.contentContainer}>

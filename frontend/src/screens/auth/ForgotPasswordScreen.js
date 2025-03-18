@@ -39,9 +39,6 @@ const ForgotPasswordScreen = ({ navigation }) => {
             const result = await forgotPassword(email);
             if (result.success) {
                 setResetSent(true);
-                // In a real app, the token would be sent via email
-                // For this demo, we'll get it from the response
-                setResetToken(result.data.resetToken);
             }
         }
     };
@@ -105,20 +102,12 @@ const ForgotPasswordScreen = ({ navigation }) => {
                                 A password reset link has been sent to your
                                 email.
                             </Text>
-
-                            {/* This is just for the demo - in a real app, the user would get the token via email */}
-                            <Text style={styles.tokenInfo}>
-                                For this demo, your reset token is:
+                            <Text style={styles.instructionsText}>
+                                Please check your email inbox and follow the
+                                instructions to reset your password. If you
+                                don't see the email, please check your spam
+                                folder.
                             </Text>
-                            <Text style={styles.tokenValue}>{resetToken}</Text>
-
-                            <Button
-                                mode="contained"
-                                onPress={handleContinue}
-                                style={styles.button}
-                            >
-                                Continue to Reset Password
-                            </Button>
                         </>
                     )}
 
@@ -184,19 +173,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginBottom: 20,
     },
-    tokenInfo: {
+    instructionsText: {
         fontSize: 14,
         color: "#666",
         textAlign: "center",
         marginTop: 10,
-    },
-    tokenValue: {
-        fontSize: 14,
-        color: "#6200ee",
-        textAlign: "center",
-        fontWeight: "bold",
-        marginTop: 5,
         marginBottom: 20,
+        lineHeight: 20,
     },
 });
 

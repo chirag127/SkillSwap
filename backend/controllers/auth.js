@@ -131,20 +131,45 @@ exports.forgotPassword = async (req, res) => {
 
         await user.save({ validateBeforeSave: false });
 
-        // In a real app, you would send an email with the reset token
-        // For this example, we'll just return the token
+        // Create reset URL
+        const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+        // Create email message
+        const message = `
+            <h1>Password Reset Request</h1>
+            <p>You are receiving this email because you (or someone else) has requested the reset of a password.</p>
+            <p>Please click on the following link to complete the process:</p>
+            <a href="${resetUrl}" target="_blank">Reset Password</a>
+            <p>This link will expire in 10 minutes.</p>
+            <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+        `;
+
+        // Send email
+        const sendEmail = require("../utils/sendEmail");
+        await sendEmail(user.email, "SkillSwap Password Reset", message);
+
         res.status(200).json({
             success: true,
-            data: {
-                resetToken,
-                message:
-                    "Password reset token generated. In a real app, this would be sent via email.",
-            },
+            message: "Password reset email sent",
         });
     } catch (err) {
+        console.error("Forgot password error:", err);
+
+        // If there was an error sending email, reset the user's token fields
+        try {
+            const user = await User.findOne({ email: req.body.email });
+            if (user) {
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpire = undefined;
+                await user.save({ validateBeforeSave: false });
+            }
+        } catch (cleanupErr) {
+            console.error("Error cleaning up after email failure:", cleanupErr);
+        }
+
         res.status(500).json({
             success: false,
-            message: "Server error",
+            message: "Could not send password reset email",
             error: err.message,
         });
     }

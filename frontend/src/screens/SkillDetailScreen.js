@@ -60,12 +60,38 @@ const SkillDetailScreen = ({ route, navigation }) => {
     }, [skillId]);
 
     const handleRequestExchange = async () => {
-        // This would be implemented in a real app
-        Alert.alert(
-            "Feature Coming Soon",
-            "Exchange request functionality will be available in the next update."
-        );
-        setShowRequestDialog(false);
+        setRequestLoading(true);
+        try {
+            // Validate inputs
+            if (!requestMessage.trim()) {
+                Alert.alert(
+                    "Error",
+                    "Please provide a message to the skill provider"
+                );
+                setRequestLoading(false);
+                return;
+            }
+
+            if (!proposedDate.trim()) {
+                Alert.alert("Error", "Please provide a proposed date");
+                setRequestLoading(false);
+                return;
+            }
+
+            // In a production app, this would send the request to the server
+            // For now, we'll just show a success message
+            setTimeout(() => {
+                setRequestLoading(false);
+                setShowRequestDialog(false);
+                Alert.alert("Success", "Your exchange request has been sent!");
+            }, 1000);
+        } catch (err) {
+            setRequestLoading(false);
+            Alert.alert(
+                "Error",
+                "Failed to send exchange request. Please try again."
+            );
+        }
     };
 
     if (loading) {

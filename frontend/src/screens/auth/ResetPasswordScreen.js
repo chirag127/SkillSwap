@@ -12,6 +12,7 @@ import { TextInput, Button, HelperText } from "react-native-paper";
 import { AuthContext } from "../../context/AuthContext";
 
 const ResetPasswordScreen = ({ navigation, route }) => {
+    // Get token from route params (either from direct navigation or deep link)
     const { resetToken } = route.params || {};
     const [token, setToken] = useState(resetToken || "");
     const [password, setPassword] = useState("");

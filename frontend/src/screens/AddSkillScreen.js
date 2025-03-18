@@ -4,9 +4,6 @@ import { TextInput, Button, HelperText, Chip } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 
 const AddSkillScreen = ({ navigation }) => {
-    // This is a placeholder implementation
-    // In a real app, this would be fully implemented
-
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
