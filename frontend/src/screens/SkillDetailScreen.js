@@ -78,13 +78,103 @@ const SkillDetailScreen = ({ route, navigation }) => {
                 return;
             }
 
-            // In a production app, this would send the request to the server
-            // For now, we'll just show a success message
-            setTimeout(() => {
+            // Validate duration
+            if (
+                !duration.trim() ||
+                isNaN(duration) ||
+                parseFloat(duration) < 0.5
+            ) {
+                Alert.alert("Error", "Duration must be at least 0.5 hours");
+                setRequestLoading(false);
+                return;
+            }
+
+            // Check if user has enough time credits
+            const totalCost = parseFloat(duration) * skill.hourlyRate;
+            if (userInfo.timeBalance < totalCost) {
+                Alert.alert(
+                    "Insufficient Time Credits",
+                    `This exchange requires ${totalCost} time credits, but you only have ${userInfo.timeBalance}. Earn more credits by providing services to others.`
+                );
+                setRequestLoading(false);
+                return;
+            }
+
+            // Format date for API
+            let formattedDate;
+            try {
+                // Simple date validation and formatting
+                const dateParts = proposedDate.split("/");
+                if (dateParts.length !== 3)
+                    throw new Error("Invalid date format");
+
+                const month = parseInt(dateParts[0]);
+                const day = parseInt(dateParts[1]);
+                const year = parseInt(dateParts[2]);
+
+                if (isNaN(month) || isNaN(day) || isNaN(year))
+                    throw new Error("Invalid date");
+                if (month < 1 || month > 12) throw new Error("Invalid month");
+                if (day < 1 || day > 31) throw new Error("Invalid day");
+                if (year < 2023) throw new Error("Date must be in the future");
+
+                formattedDate = new Date(year, month - 1, day).toISOString();
+            } catch (dateError) {
+                Alert.alert(
+                    "Error",
+                    "Please enter a valid date in MM/DD/YYYY format"
+                );
+                setRequestLoading(false);
+                return;
+            }
+
+            // Create exchange request
+            const exchangeData = {
+                skill: skillId,
+                requestMessage: requestMessage,
+                proposedDate: formattedDate,
+                duration: parseFloat(duration),
+                // The API will calculate timeCredits based on skill hourly rate and duration
+            };
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userToken}`,
+                    "Content-Type": "application/json",
+                },
+            };
+
+            try {
+                const response = await axios.post(
+                    `${API_URL}/api/exchanges`,
+                    exchangeData,
+                    config
+                );
+
                 setRequestLoading(false);
                 setShowRequestDialog(false);
-                Alert.alert("Success", "Your exchange request has been sent!");
-            }, 1000);
+
+                Alert.alert(
+                    "Success",
+                    "Your exchange request has been sent! You can view it in the Exchanges tab.",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => navigation.navigate("Exchanges"),
+                        },
+                    ]
+                );
+            } catch (apiError) {
+                console.error(
+                    "API Error:",
+                    apiError.response?.data || apiError.message
+                );
+                const errorMessage =
+                    apiError.response?.data?.message ||
+                    "Failed to send exchange request. Please try again.";
+                Alert.alert("Error", errorMessage);
+                setRequestLoading(false);
+            }
         } catch (err) {
             setRequestLoading(false);
             Alert.alert(
