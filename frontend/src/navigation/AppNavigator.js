@@ -25,6 +25,7 @@ import EventsScreen from "../screens/EventsScreen";
 import EventDetailScreen from "../screens/EventDetailScreen";
 import AddEventScreen from "../screens/AddEventScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
 
 // Context
 import { AuthContext } from "../context/AuthContext";
@@ -167,6 +168,11 @@ const ProfileStack = () => {
                 name="Settings"
                 component={SettingsScreen}
                 options={{ title: "Settings" }}
+            />
+            <Stack.Screen
+                name="EditProfile"
+                component={EditProfileScreen}
+                options={{ title: "Edit Profile" }}
             />
         </Stack.Navigator>
     );

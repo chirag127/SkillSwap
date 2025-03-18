@@ -101,8 +101,7 @@ const ProfileScreen = ({ navigation }) => {
 
     const handleEditProfile = () => {
         // Navigate to edit profile screen
-        // For this demo, we'll just show an alert
-        alert("Edit profile functionality would go here");
+        navigation.navigate("EditProfile");
     };
 
     const handleLogout = () => {

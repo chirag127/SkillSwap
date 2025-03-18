@@ -26,7 +26,7 @@ const SettingsScreen = ({ navigation }) => {
                     left={(props) => (
                         <List.Icon {...props} icon="account-edit" />
                     )}
-                    onPress={showComingSoonAlert}
+                    onPress={() => navigation.navigate("EditProfile")}
                 />
                 <List.Item
                     title="Change Password"

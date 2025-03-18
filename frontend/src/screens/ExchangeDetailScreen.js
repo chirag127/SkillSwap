@@ -434,21 +434,129 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         padding: 20,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
         alignItems: "center",
+        padding: 20,
     },
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginBottom: 10,
-    },
-    subtitle: {
+    loadingText: {
+        marginTop: 10,
         fontSize: 16,
         color: "#666",
-        marginBottom: 30,
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+    },
+    errorText: {
+        color: "#FF5252",
+        fontSize: 16,
+        marginBottom: 20,
         textAlign: "center",
     },
-    button: {
-        paddingHorizontal: 20,
+    statusContainer: {
+        alignItems: "center",
+        marginBottom: 15,
+    },
+    statusChip: {
+        paddingHorizontal: 15,
+    },
+    statusText: {
+        fontWeight: "bold",
+    },
+    card: {
+        width: "100%",
+        marginBottom: 15,
+        elevation: 2,
+    },
+    cardTitle: {
+        fontSize: 18,
+        marginBottom: 10,
+    },
+    userInfo: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    userImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        marginRight: 10,
+    },
+    userDetails: {
+        flex: 1,
+    },
+    userName: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginBottom: 5,
+    },
+    ratingContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    ratingText: {
+        marginLeft: 5,
+        color: "#666",
+    },
+    sectionTitle: {
+        fontSize: 16,
+        marginBottom: 15,
+        color: "#666",
+    },
+    detailRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 10,
+    },
+    detailLabel: {
+        fontWeight: "bold",
+        color: "#666",
+    },
+    detailValue: {
+        color: "#333",
+    },
+    messageContainer: {
+        marginBottom: 15,
+    },
+    messageLabel: {
+        fontWeight: "bold",
+        color: "#666",
+        marginBottom: 5,
+    },
+    messageText: {
+        color: "#333",
+        backgroundColor: "#f9f9f9",
+        padding: 10,
+        borderRadius: 5,
+        borderLeftWidth: 3,
+        borderLeftColor: "#6200ee",
+    },
+    actionsContainer: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        marginTop: 10,
+    },
+    actionButton: {
+        margin: 5,
+        minWidth: 120,
+    },
+    acceptButton: {
+        backgroundColor: "#4CAF50",
+    },
+    declineButton: {
+        borderColor: "#FF5252",
+    },
+    completeButton: {
+        backgroundColor: "#2196F3",
+    },
+    dialogInput: {
+        marginBottom: 10,
     },
 });
 
