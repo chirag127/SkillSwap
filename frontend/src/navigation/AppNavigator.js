@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { enableScreens } from "react-native-screens";
 
 // Auth Screens
 import LoginScreen from "../screens/auth/LoginScreen";
@@ -26,6 +28,9 @@ import SettingsScreen from "../screens/SettingsScreen";
 
 // Context
 import { AuthContext } from "../context/AuthContext";
+
+// Enable native screens for better performance
+enableScreens();
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -254,7 +259,10 @@ const AppNavigator = () => {
     };
 
     return (
-        <NavigationContainer linking={linking}>
+        <NavigationContainer
+            linking={linking}
+            fallback={<ActivityIndicator size="large" color="#6200ee" />}
+        >
             {userToken !== null ? <AppTabs /> : <AuthStack />}
         </NavigationContainer>
     );

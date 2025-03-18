@@ -1,9 +1,15 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
+import { LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { AuthProvider } from "./src/context/AuthContext";
 import AppNavigator from "./src/navigation/AppNavigator";
+
+// Ignore specific warnings
+LogBox.ignoreLogs([
+    'Unsupported top level event type "topInsetsChange" dispatched',
+]);
 
 // Define the theme
 const theme = {
