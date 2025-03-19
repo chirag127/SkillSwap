@@ -66,7 +66,6 @@ SkillSwap is a mobile application that enables users to trade skills and service
     # Email Configuration
     EMAIL_USERNAME=your_email@example.com
     EMAIL_PASSWORD=your_email_password
-    FRONTEND_URL=http://localhost:3000
     ```
 
 3. **Frontend Setup**

@@ -77,12 +77,18 @@ const ResetPasswordScreen = ({ navigation, route }) => {
     };
 
     const handleResetPassword = async () => {
-        const isTokenValid = validateToken();
+        const isCodeValid = validateCode();
+        const isEmailValid = validateEmail();
         const isPasswordValid = validatePassword();
         const isConfirmPasswordValid = validateConfirmPassword();
 
-        if (isTokenValid && isPasswordValid && isConfirmPasswordValid) {
-            const result = await resetPassword(token, password);
+        if (
+            isCodeValid &&
+            isEmailValid &&
+            isPasswordValid &&
+            isConfirmPasswordValid
+        ) {
+            const result = await resetPassword(code, userEmail, password);
             if (result.success) {
                 // User will be automatically logged in by the context
             }
