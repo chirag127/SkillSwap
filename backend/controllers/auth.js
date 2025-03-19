@@ -180,13 +180,14 @@ exports.forgotPassword = async (req, res) => {
 // @access  Public
 exports.resetPassword = async (req, res) => {
     try {
-        // Get verification code from request body
-        const { verificationCode, password } = req.body;
+        // Get verification code, email and password from request body
+        const { verificationCode, email, password } = req.body;
 
-        if (!verificationCode || !password) {
+        if (!verificationCode || !email || !password) {
             return res.status(400).json({
                 success: false,
-                message: "Please provide verification code and new password",
+                message:
+                    "Please provide verification code, email and new password",
             });
         }
 
@@ -197,6 +198,7 @@ exports.resetPassword = async (req, res) => {
             .digest("hex");
 
         const user = await User.findOne({
+            email,
             resetPasswordToken,
             resetPasswordExpire: { $gt: Date.now() },
         });
@@ -204,7 +206,7 @@ exports.resetPassword = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid token",
+                message: "Invalid or expired verification code",
             });
         }
 

@@ -109,20 +109,43 @@ const ResetPasswordScreen = ({ navigation, route }) => {
                 </View>
 
                 <View style={styles.formContainer}>
-                    {!resetToken && (
+                    {!verificationCode && (
                         <>
                             <TextInput
-                                label="Reset Token"
-                                value={token}
-                                onChangeText={setToken}
+                                label="Verification Code"
+                                value={code}
+                                onChangeText={setCode}
                                 mode="outlined"
+                                keyboardType="number-pad"
+                                maxLength={6}
                                 style={styles.input}
-                                error={!!tokenError}
-                                onBlur={validateToken}
+                                error={!!codeError}
+                                onBlur={validateCode}
                             />
-                            {tokenError ? (
+                            {codeError ? (
                                 <HelperText type="error">
-                                    {tokenError}
+                                    {codeError}
+                                </HelperText>
+                            ) : null}
+                        </>
+                    )}
+
+                    {!email && (
+                        <>
+                            <TextInput
+                                label="Email"
+                                value={userEmail}
+                                onChangeText={setUserEmail}
+                                mode="outlined"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                style={styles.input}
+                                error={!!emailError}
+                                onBlur={validateEmail}
+                            />
+                            {emailError ? (
+                                <HelperText type="error">
+                                    {emailError}
                                 </HelperText>
                             ) : null}
                         </>

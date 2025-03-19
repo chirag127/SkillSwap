@@ -253,12 +253,7 @@ const AppNavigator = () => {
                 Login: "login",
                 Register: "register",
                 ForgotPassword: "forgot-password",
-                ResetPassword: {
-                    path: "reset-password/:resetToken",
-                    parse: {
-                        resetToken: (resetToken) => resetToken,
-                    },
-                },
+                ResetPassword: "reset-password",
                 // Add other deep link configurations as needed
             },
         },

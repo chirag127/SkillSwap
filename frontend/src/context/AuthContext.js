@@ -102,14 +102,14 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const resetPassword = async (resetToken, password) => {
+    const resetPassword = async (verificationCode, email, password) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const response = await axios.put(
-                `${API_URL}/api/auth/resetpassword/${resetToken}`,
-                { password }
+                `${API_URL}/api/auth/resetpassword`,
+                { verificationCode, email, password }
             );
 
             const { token, user } = response.data;
