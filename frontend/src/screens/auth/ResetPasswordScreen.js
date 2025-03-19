@@ -12,26 +12,43 @@ import { TextInput, Button, HelperText } from "react-native-paper";
 import { AuthContext } from "../../context/AuthContext";
 
 const ResetPasswordScreen = ({ navigation, route }) => {
-    // Get token from route params (either from direct navigation or deep link)
-    const { resetToken } = route.params || {};
-    const [token, setToken] = useState(resetToken || "");
+    // Get verification code and email from route params
+    const { verificationCode, email } = route.params || {};
+    const [code, setCode] = useState(verificationCode || "");
+    const [userEmail, setUserEmail] = useState(email || "");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const [tokenError, setTokenError] = useState("");
+    const [codeError, setCodeError] = useState("");
+    const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     const { resetPassword, error, isLoading } = useContext(AuthContext);
 
-    const validateToken = () => {
-        if (!token) {
-            setTokenError("Reset token is required");
+    const validateCode = () => {
+        if (!code) {
+            setCodeError("Verification code is required");
+            return false;
+        } else if (code.length !== 6 || !/^\d+$/.test(code)) {
+            setCodeError("Please enter a valid 6-digit code");
             return false;
         }
-        setTokenError("");
+        setCodeError("");
+        return true;
+    };
+
+    const validateEmail = () => {
+        if (!userEmail) {
+            setEmailError("Email is required");
+            return false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+            setEmailError("Please enter a valid email");
+            return false;
+        }
+        setEmailError("");
         return true;
     };
 

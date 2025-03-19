@@ -8,14 +8,21 @@ import {
     KeyboardAvoidingView,
     Platform,
 } from "react-native";
-import { TextInput, Button, HelperText } from "react-native-paper";
+import {
+    TextInput,
+    Button,
+    HelperText,
+    ActivityIndicator,
+} from "react-native-paper";
 import { AuthContext } from "../../context/AuthContext";
 
 const ForgotPasswordScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
     const [resetSent, setResetSent] = useState(false);
-    const [resetToken, setResetToken] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
+    const [verificationCodeError, setVerificationCodeError] = useState("");
+    const [verifyingCode, setVerifyingCode] = useState(false);
 
     const { forgotPassword, error, isLoading } = useContext(AuthContext);
 
@@ -43,8 +50,31 @@ const ForgotPasswordScreen = ({ navigation }) => {
         }
     };
 
+    const validateVerificationCode = () => {
+        if (!verificationCode.trim()) {
+            setVerificationCodeError("Verification code is required");
+            return false;
+        } else if (
+            verificationCode.length !== 6 ||
+            !/^\d+$/.test(verificationCode)
+        ) {
+            setVerificationCodeError("Please enter a valid 6-digit code");
+            return false;
+        }
+        setVerificationCodeError("");
+        return true;
+    };
+
     const handleContinue = () => {
-        navigation.navigate("ResetPassword", { resetToken });
+        if (!validateVerificationCode()) {
+            return;
+        }
+
+        setVerifyingCode(true);
+
+        // Navigate to reset password screen with verification code
+        navigation.navigate("ResetPassword", { verificationCode, email });
+        setVerifyingCode(false);
     };
 
     return (
@@ -99,15 +129,40 @@ const ForgotPasswordScreen = ({ navigation }) => {
                     ) : (
                         <>
                             <Text style={styles.successMessage}>
-                                A password reset link has been sent to your
-                                email.
+                                A verification code has been sent to your email.
                             </Text>
                             <Text style={styles.instructionsText}>
-                                Please check your email inbox and follow the
-                                instructions to reset your password. If you
-                                don't see the email, please check your spam
-                                folder.
+                                Please check your email inbox for the 6-digit
+                                code and enter it below. If you don't see the
+                                email, please check your spam folder.
                             </Text>
+
+                            <TextInput
+                                label="Verification Code"
+                                value={verificationCode}
+                                onChangeText={setVerificationCode}
+                                mode="outlined"
+                                keyboardType="number-pad"
+                                maxLength={6}
+                                style={styles.input}
+                                error={!!verificationCodeError}
+                                onBlur={validateVerificationCode}
+                            />
+                            {verificationCodeError ? (
+                                <HelperText type="error">
+                                    {verificationCodeError}
+                                </HelperText>
+                            ) : null}
+
+                            <Button
+                                mode="contained"
+                                onPress={handleContinue}
+                                style={styles.button}
+                                loading={verifyingCode}
+                                disabled={verifyingCode}
+                            >
+                                Continue to Reset Password
+                            </Button>
                         </>
                     )}
 

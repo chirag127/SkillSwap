@@ -117,13 +117,15 @@ exports.forgotPassword = async (req, res) => {
             });
         }
 
-        // Get reset token
-        const resetToken = crypto.randomBytes(20).toString("hex");
+        // Generate a 6-digit verification code
+        const verificationCode = Math.floor(
+            100000 + Math.random() * 900000
+        ).toString();
 
-        // Hash token and set to resetPasswordToken field
+        // Hash code and set to resetPasswordToken field
         user.resetPasswordToken = crypto
             .createHash("sha256")
-            .update(resetToken)
+            .update(verificationCode)
             .digest("hex");
 
         // Set expire
@@ -131,16 +133,14 @@ exports.forgotPassword = async (req, res) => {
 
         await user.save({ validateBeforeSave: false });
 
-        // Create reset URL
-        const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
-
-        // Create email message
+        // Create email message with verification code
         const message = `
-            <h1>Password Reset Request</h1>
+            <h1>Password Reset Verification Code</h1>
             <p>You are receiving this email because you (or someone else) has requested the reset of a password.</p>
-            <p>Please click on the following link to complete the process:</p>
-            <a href="${resetUrl}" target="_blank">Reset Password</a>
-            <p>This link will expire in 10 minutes.</p>
+            <p>Your verification code is:</p>
+            <h2 style="text-align: center; font-size: 32px; letter-spacing: 5px; padding: 10px; background-color: #f5f5f5; border-radius: 5px;">${verificationCode}</h2>
+            <p>Enter this code in the app to reset your password.</p>
+            <p>This code will expire in 10 minutes.</p>
             <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
         `;
 
@@ -176,14 +176,24 @@ exports.forgotPassword = async (req, res) => {
 };
 
 // @desc    Reset password
-// @route   PUT /api/auth/resetpassword/:resettoken
+// @route   PUT /api/auth/resetpassword
 // @access  Public
 exports.resetPassword = async (req, res) => {
     try {
-        // Get hashed token
+        // Get verification code from request body
+        const { verificationCode, password } = req.body;
+
+        if (!verificationCode || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide verification code and new password",
+            });
+        }
+
+        // Get hashed verification code
         const resetPasswordToken = crypto
             .createHash("sha256")
-            .update(req.params.resettoken)
+            .update(verificationCode)
             .digest("hex");
 
         const user = await User.findOne({
