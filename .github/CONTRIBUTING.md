@@ -1,97 +1,95 @@
-# Contributing to SkillSwap-Community-Skill-Exchange-Mobile-App
+# 🚀 Contributing to SkillSwap-Community-Barter-Network-React-Native-Mobile-App
 
-Thank you for considering contributing to the SkillSwap community! We welcome your ideas, bug reports, and code contributions to make SkillSwap an even better platform for community-driven skill and service exchange.
+Welcome to the SkillSwap community! We're excited to have you contribute to our React Native mobile app, a platform designed to foster a vibrant community-based barter economy.
 
-## Guiding Principles
+## 1. Our Guiding Principles
 
-Our development follows the Apex Technical Authority's philosophy: "Zero-Defect, High-Velocity, Future-Proof." This means we prioritize:
+We adhere to the core Apex Technical Authority philosophy: **"Zero-Defect, High-Velocity, Future-Proof."** This translates to:
 
-*   **Quality:** Robustness, reliability, and adherence to best practices.
-*   **Speed:** Efficient development cycles and clear contribution pathways.
-*   **Sustainability:** Maintainable, scalable, and adaptable code.
+*   **Quality First:** Every contribution should strive for correctness and robustness.
+*   **Efficiency:** Streamlined workflows enable rapid iteration and deployment.
+*   **Sustainability:** Codebase must be maintainable and adaptable for future growth.
 
-## How to Contribute
+## 2. Code of Conduct
 
-### 1. Reporting Bugs
+This project and everyone participating in it is governed by our [Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [your-email@example.com](mailto:your-email@example.com).
 
-Before reporting a bug, please check the existing issues to see if it has already been reported.
+## 3. How to Contribute
 
-If it's a new bug:
+### 3.1. Setup Your Development Environment
 
-*   **Navigate to the Issues tab** on GitHub.
-*   **Click "New Issue"** and select the `Bug Report` template.
-*   **Provide a clear and concise title.**
-*   **Describe the bug in detail:**
-    *   What did you expect to happen?
-    *   What actually happened?
-    *   Steps to reproduce the bug (including device, OS version, app version if applicable).
-    *   Screenshots or screen recordings are highly encouraged.
-*   **Add any relevant logs or error messages.**
+Follow the setup instructions in the main `README.md` to get the project running locally. This typically involves:
 
-## 2. Suggesting Enhancements or Features
-
-We love new ideas!
-
-*   **Navigate to the Issues tab** on GitHub.
-*   **Click "New Issue"** and select the `Feature Request` template.
-*   **Describe your suggestion** clearly.
-*   **Explain why** this feature would be valuable to the SkillSwap community.
-
-## 3. Contributing Code
-
-We encourage pull requests for bug fixes and new features.
-
-### Prerequisites
-
-*   **Fork the repository** to your GitHub account.
-*   **Clone your forked repository** locally:
+1.  **Cloning the Repository:**
     bash
-    git clone https://github.com/chirag127/SkillSwap-Community-Skill-Exchange-Mobile-App
-    cd SkillSwap-Community-Skill-Exchange-Mobile-App
+    git clone https://github.com/chirag127/SkillSwap-Community-Barter-Network-React-Native-Mobile-App.git
+    cd SkillSwap-Community-Barter-Network-React-Native-Mobile-App
     
-*   **Set up your development environment:** Follow the instructions in the `README.md` to install dependencies (likely using Expo CLI for React Native).
-
-### Development Workflow
-
-1.  **Create a New Branch:** Always branch from the `main` branch. Give your branch a descriptive name (e.g., `fix/login-bug`, `feat/add-user-profile`).
+2.  **Installing Dependencies:** (Assuming Node.js and npm/yarn are installed)
     bash
-    git checkout -b fix/my-bug-fix
+    # For npm
+    npm install
+    # Or for yarn
+    yarn install
     
-2.  **Make Your Changes:** Write clean, well-commented code. Adhere to the project's coding style and architectural patterns.
-3.  **Test Your Changes:** Ensure your changes do not introduce regressions. Run the relevant tests. For React Native, this typically involves:
-    *   Manual testing on emulators/devices.
-    *   Running unit/integration tests (if applicable, via Jest or similar).
-    *   Leveraging Expo's development tools for live reloading and debugging.
-4.  **Commit Your Changes:** Write clear and concise commit messages. Follow conventional commits if possible.
+3.  **Backend Setup:** Refer to the backend documentation within the project for its specific setup and running instructions.
+
+### 3.2. Feature Development Workflow
+
+*   **Identify an Issue/Feature:** Look for open issues on the GitHub repository or propose a new feature.
+*   **Branching Strategy:** Create a new branch for your feature or bug fix. Use a descriptive name (e.g., `feature/user-profile-enhancement`, `bugfix/login-validation-error`).
+    bash
+    git checkout -b your-branch-name
+    
+*   **Develop:** Implement your changes following the project's coding standards and architectural patterns.
+*   **Test:** Write unit and integration tests for your new code using `Vitest` (for frontend) and `Jest`/`Supertest` (for backend).
+*   **Lint & Format:** Ensure your code adheres to the project's linting and formatting rules. Run `npm run lint` and `npm run format` (or equivalent `yarn` commands).
+*   **Commit:** Make clear, concise, and atomic commits.
     bash
     git add .
-    git commit -m "fix: Resolve issue with user authentication flow"
+    git commit -m "feat: Add user profile editing functionality"
     
-5.  **Push Your Branch:** Push your changes to your fork.
+*   **Pull Request (PR):** Open a Pull Request against the `main` branch. Provide a detailed description of your changes, the problem they solve, and how to test them.
+
+### 3.3. Code Standards & Best Practices
+
+*   **Language:** Primarily JavaScript (ES6+), with TypeScript for enhanced type safety in relevant modules.
+*   **Frontend Framework:** React Native with Expo.
+*   **Backend Framework:** Node.js with Express.js.
+*   **State Management:** Use React Context API or a suitable library for global state.
+*   **Styling:** Employ a consistent styling approach, likely using StyleSheet API or a compatible library.
+*   **Testing:** Comprehensive test coverage is expected. Aim for high code coverage metrics.
+*   **SOLID Principles:** Adhere to SOLID principles wherever applicable to ensure maintainable and scalable code.
+*   **DRY (Don't Repeat Yourself):** Avoid redundant code. Utilize reusable components and utility functions.
+*   **YAGNI (You Aren't Gonna Need It):** Implement only what is currently needed, avoiding premature optimization or over-engineering.
+
+## 4. Submitting a Pull Request
+
+*   **Ensure your fork is up-to-date:**
     bash
-    git push origin fix/my-bug-fix
+    git fetch upstream
+    git merge upstream/main
     
-6.  **Create a Pull Request (PR):**
-    *   Navigate to the `SkillSwap-Community-Skill-Exchange-Mobile-App` repository on GitHub.
-    *   Click the **"Compare & pull request"** button.
-    *   Ensure your branch is compared against the `main` branch of the original repository.
-    *   **Fill out the Pull Request Template:** Provide a clear title and a detailed description of your changes. Explain the problem solved and the solution implemented.
-    *   Link any related issues (e.g., `Closes #123`).
+*   **Run all tests and linters:** Verify that all checks pass locally.
+*   **Write a clear PR description:** Explain your changes, motivation, and any potential impact.
+*   **Link to the relevant issue:** If your PR addresses an issue, reference it using keywords like `Fixes #123` or `Closes #456`.
 
-### Code Standards & Best Practices
+## 5. Reporting Bugs
 
-*   **Readability:** Write clear, concise, and well-documented code.
-*   **Consistency:** Adhere to the existing code style (e.g., formatting, naming conventions). We use ESLint and Prettier configured within the Expo project.
-*   **Modularity:** Design components and modules for reusability and separation of concerns.
-*   **Error Handling:** Implement robust error handling mechanisms.
-*   **Security:** Be mindful of security best practices, especially when handling user data or interacting with APIs.
+If you find a bug, please open an issue. Provide as much detail as possible:
 
-## AI Agent Directives & Environment Setup
+*   **Steps to Reproduce:** Clear, numbered steps to trigger the bug.
+*   **Expected Behavior:** What should have happened?
+*   **Actual Behavior:** What actually happened?
+*   **Environment:** Device, OS version, App version.
+*   **Screenshots/Videos:** If helpful.
 
-For detailed insights into our architectural patterns, AI integrations (if any), and specific verification commands, please refer to the **AI Agent Directives** section within the `README.md` file. This section outlines the core principles and tools we rely on, ensuring alignment for all contributors.
+## 6. Feature Requests
 
-## Licensing
+We welcome new feature ideas! Please open an issue and describe your proposed feature, its benefits, and how you envision it working.
 
-By contributing to this project, you agree that your contributions will be licensed under the **CC BY-NC 4.0 License**.
+## 7. Questions?
 
----
+If you have any questions or need clarification, feel free to open an issue or reach out to the maintainers.
+
+Thank you for contributing to SkillSwap! Your efforts help build a stronger community.
