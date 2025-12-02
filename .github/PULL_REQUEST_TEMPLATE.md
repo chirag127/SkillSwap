@@ -1,64 +1,50 @@
-# Pull Request for SkillSwap-Community-Skill-Exchange-Mobile-App
+# Pull Request Template
 
-## 1. Overview
+**Please provide a clear and concise description of your changes.**
 
-Briefly describe the changes introduced by this pull request. What problem does it solve or what feature does it add?
+**Related Issue:** (If applicable, link to the issue this PR addresses, e.g., `#123`)
 
-## 2. Related Issues
+---
 
-If this PR closes or relates to any open issues, please link them here. Use keywords like `closes`, `fixes`, `resolves`.
+## Type of Change
 
-Example:
-- Closes #123
-- Fixes #456
+(Check all that apply)
 
-## 3. Motivation
+* [ ] New feature (non-breaking change which adds functionality)
+* [ ] Bug fix (non-breaking change which fixes an issue)
+* [ ] Refactor (code quality improvement, no feature change)
+* [ ] Documentation update
+* [ ] Performance improvement
+* [ ] Testing update
+* [ ] Chore (maintenance, build tools, etc.)
+* [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 
-Explain the 'why' behind these changes. What is the context? Why are these changes necessary or beneficial?
+---
 
-## 4. Proposed Changes
+## Description
 
-Detail the specific technical changes made. This could include:
+(Provide a detailed explanation of the changes. What problem does this solve? How does it solve it? What are the key impacts?)
 
-*   New features implemented.
-*   Bug fixes applied.
-*   Refactoring or code improvements.
-*   Dependency updates.
-*   Architectural modifications.
+---
 
-## 5. Technical Implementation Details
+## Checklist
 
-Provide any specific technical details that a reviewer might need to understand. This could include:
+(Go through all the items below and check them off. If an item is not applicable, explain why.)
 
-*   New libraries or frameworks introduced.
-*   Key algorithmic changes.
-*   API endpoints affected or added.
-*   Data model changes.
-
-## 6. Testing Performed
-
-Describe the tests that have been conducted to ensure the quality and correctness of the changes.
-
-*   Unit tests:
-*   Integration tests:
-*   End-to-end tests (if applicable):
-*   Manual testing:
-
-## 7. Screenshots/Recordings (If applicable)
-
-For UI changes, please include screenshots or short video recordings demonstrating the impact of your changes.
-
-## 8. Checklist
-
-*   [ ] My code follows the project's style guidelines and adheres to the Apex standards.
+*   [ ] My code follows the style guidelines of this project (Apex Standards).
 *   [ ] I have performed a self-review of my own code.
 *   [ ] I have commented my code, particularly in hard-to-understand areas.
-*   [ ] I have made corresponding changes to the documentation.
+*   [ ] I have made corresponding changes to the documentation (if applicable).
 *   [ ] My changes generate no new warnings.
 *   [ ] I have added tests that prove my fix is effective or that my feature works.
-*   [ ] All new and existing unit tests pass locally with my changes.
+*   [ ] New and existing unit tests pass locally with my changes.
 *   [ ] Any dependent changes have been merged and published.
+*   [ ] I have assigned reviewers to this pull request.
+*   [ ] I have updated the `AGENTS.md` to reflect any relevant changes (if applicable).
+*   [ ] I have verified that all badge links and repository references point to the correct, new repository URL (`https://github.com/chirag127/SkillSwap-Community-Barter-Network-React-Native-Mobile-App`).
 
-## 9. Additional Notes
+---
 
-Include any other information that might be helpful for the reviewers.
+## Further Information
+
+(Optional: You can provide additional context here, such as screenshots, logs, or links to external resources.)
