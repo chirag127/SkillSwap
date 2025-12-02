@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Prettier
+        run: npm run format:check
+
+      - name: Run TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build app
+        run: npm run build
+
+  android-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
+      - name: Setup EAS
+        run: npm install -g eas-cli
+
+      - name: Prepare keystore
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: |
+          echo '${{ secrets.ANDROID_KEYSTORE_BASE64 }}' | base64 -d > android.keystore
+          echo 'KEYSTORE_PATH=$(pwd)/android.keystore' >> $GITHUB_ENV
+
+      - name: Build Android app with EAS (Development)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          eas build -p android --profile development --non-interactive
+          echo ${{ secrets.EAS_EXPO_TOKEN }} # Add token secret so EAS CLI does not prompt for login during PR checks
+        env:
+          EAS_EXPO_TOKEN: ${{ secrets.EAS_EXPO_TOKEN }}
+
+      - name: Build Android app with EAS (Production)
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: |
+          eas build -p android --profile production --non-interactive
+        env:
+          EAS_EXPO_TOKEN: ${{ secrets.EAS_EXPO_TOKEN }}
