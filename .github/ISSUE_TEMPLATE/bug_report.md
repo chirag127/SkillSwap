@@ -1,43 +1,39 @@
 ---
 name: Bug Report
-about: Report a reproducible bug in the SkillSwap Mobile App.
-title: "Bug: [Short Description of Bug]"
-labels: bug
+about: Report a bug found in the SkillSwap Community Barter Network Mobile App
+title: "[BUG] Short Description of the Bug"
+labels: "bug"
 assignees: "chirag127"
 
-}
 
-## Bug Description
+### Description
 
-A clear and concise description of what the bug is. What did you expect to happen, and what actually happened?
+A clear and concise description of the bug. What is happening and what was expected to happen?
 
-## Steps to Reproduce
+### Steps to Reproduce
 
-1. Go to '...' section.
-2. Click on '....'.
-3. Scroll down to '....'.
-4. See error.
+Steps to reproduce the behavior:
+1. Go to '...' 
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-## Expected Behavior
+### Expected Behavior
 
-Explain what you expected to happen.
+What did you expect to happen?
 
-## Actual Behavior
+### Actual Behavior
 
-Explain what actually happened.
+What actually happened?
 
-## Screenshots / Screen Recordings (Optional)
+### Environment
 
-If applicable, add screenshots or screen recordings to help explain your problem. Provide a link if too large.
+*   **App Version:** [e.g., 1.0.0]
+*   **Device:** [e.g., iPhone 14 Pro, Samsung Galaxy S23]
+*   **Operating System:** [e.g., iOS 17.2.1, Android 14]
+*   **Node/Expo Version (if applicable):** [e.g., Node 20.10.0, Expo SDK 49]
 
-## Device Information (Optional)
+### Additional Context
 
-*   **Device:** (e.g., iPhone 15 Pro, Samsung Galaxy S23)
-*   **OS:** (e.g., iOS 17.2, Android 14)
-*   **App Version:** (Find this in the app's settings or About screen)
+Add any other context about the problem here. Screenshots, logs, or relevant code snippets are highly encouraged.
 
-## Additional Context (Optional)
-
-Add any other context about the problem here. Such as environment, user context, or logs.
-
----
