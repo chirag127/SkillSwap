@@ -22,188 +22,78 @@
 ---
 
 ## 3. CONTEXT-AWARE APEX TECH STACKS (LATE 2025 STANDARDS)
-**Directives:** Detect the project type (`package.json` for JavaScript/React Native) and apply the corresponding **Apex Toolchain**. This repository, `SkillSwap-Community-Skill-Exchange-Mobile-App`, is a React Native mobile application.
+**Directives:** Detect the project type and apply the corresponding **Apex Toolchain**. This repository, `SkillSwap-Community-Barter-Network-React-Native-Mobile-App`, is a JavaScript/TypeScript-based mobile application.
 
-*   **PRIMARY SCENARIO: WEB / APP / GUI (Modern Frontend / Mobile)**
-    *   **Stack:** This project leverages **TypeScript 6.x** (Strict Mode MANDATORY) with **React Native 0.7x+** and **Expo 5x**. State management will utilize Signals (industry-standard for 2026). UI styling will be handled by **Tailwind CSS v4**.
-    *   **Architecture:** Adheres to **Feature-Sliced Design (FSD)** for maintainability and scalability. Components, features, and layers are clearly delineated.
-    *   **State Management:** Signals (e.g., Preact Signals, SolidJS Signals, or a framework-agnostic implementation).
-    *   **UI/UX:** Tailwind CSS v4 for rapid, consistent styling. Expo for streamlined mobile development.
+*   **PRIMARY SCENARIO: WEB / APP / GUI (Modern Frontend - Mobile Focus)**
+    *   **Stack:** This project leverages **TypeScript (Strict)** and **React Native (v0.75+)** with **Expo (v51+)** for accelerated development and streamlined native builds. For styling, **TailwindCSS v4** is the standard, integrated via a configuration compatible with React Native.
+    *   **Lint/Test:** **Biome** is employed for ultra-fast linting and formatting. **Vitest** handles unit and component testing, ensuring high test coverage. **Playwright** is used for end-to-end testing where applicable, focusing on critical user flows.
+    *   **Architecture:** Employs **Feature-Sliced Design (FSD)** principles adapted for React Native to ensure maintainable, scalable code organization. State management follows the **Signals** pattern (standardized), ensuring efficient and declarative UI updates.
+    *   **Backend Integration:** Assumes a RESTful API interaction pattern with a Node.js/Express.js backend. Security is paramount, utilizing **JWT Authentication**.
 
-*   **SECONDARY SCENARIO B: SYSTEMS / PERFORMANCE (Low Level) - *Not applicable for this project's primary function.***
+*   **SECONDARY SCENARIO B: SYSTEMS / PERFORMANCE (Low Level) - *Not applicable for this project.***
     *   **Stack:** Rust (Cargo) or Go (Modules).
     *   **Lint:** Clippy / GolangCI-Lint.
     *   **Architecture:** Hexagonal Architecture (Ports & Adapters).
 
-*   **TERTIARY SCENARIO C: DATA / AI / SCRIPTS (Python) - *Not applicable for this project's primary function.***
+*   **TERTIARY SCENARIO C: DATA / AI / SCRIPTS (Python) - *Not applicable for this project.***
     *   **Stack:** uv (Manager), Ruff (Linter), Pytest (Test).
     *   **Architecture:** Modular Monolith or Microservices.
 
 ---
 
-## 4. DEVELOPMENT WORKFLOW & VALIDATION
+## 4. DEVELOPMENT & VERIFICATION PROTOCOLS
 
-*   **DEPENDENCY MANAGEMENT:**
-    *   **TypeScript/React Native:** Use **npm** or **yarn** with `package.json`. Ensure all dependencies are up-to-date and compatible with Expo 5x.
-    *   **Expo:** Adhere to Expo's guidelines for managed workflow or bare workflow as appropriate.
-
+*   **SETUP & EXECUTION:**
+    *   **Version Control:** `git clone https://github.com/chirag127/SkillSwap-Community-Barter-Network-React-Native-Mobile-App.git`
+    *   **Dependency Management:** `npx expo install` or `npm install` / `yarn install` (post-clone, depending on project setup).
+    *   **Environment:** Ensure Node.js (v20+) and Expo CLI are installed.
 *   **LINTING & FORMATTING:**
-    *   **Tool:** **Biome** (v7+) for ultra-fast linting and formatting across TypeScript and React Native.
-    *   **Configuration:** A comprehensive `.biome.json` file must be maintained, enforcing strict coding standards (e.g., `no-unused-imports`, `no-explicit-any`, `prefer-const`). All code must pass Biome checks without errors or warnings.
-
-*   **TESTING FRAMEWORK:**
-    *   **Unit/Integration Testing:** **Vitest** (v2+) is the standard for fast, Jest-compatible unit and integration tests.
-    *   **End-to-End (E2E) Testing:** **Playwright** (v2+) for reliable E2E testing across iOS and Android simulators/emulators.
-    *   **Test Coverage:** Aim for **>90%** code coverage. Use `codecov.io` for reporting.
-    *   **Mocking:** Utilize Vitest's mocking capabilities and libraries like `msw` (Mock Service Worker) for API request mocking.
-
-*   **VERSION CONTROL:**
-    *   **Branching Strategy:** GitFlow or a simplified Trunk-Based Development model with feature branches.
-    *   **Commit Messages:** Adhere to **Conventional Commits** (e.g., `feat: add user profile component`, `fix: resolve login bug`).
+    *   **Command:** `npx @biomejs/biome lint --apply .` and `npx @biomejs/biome format --apply .` (or equivalent script in `package.json`).
+    *   **Purpose:** Maintain code quality and consistency across the codebase.
+*   **TESTING:**
+    *   **Unit/Component Tests:** `npx vitest`.
+    *   **E2E Tests (if configured):** `npx playwright test`.
+    *   **Purpose:** Verify the integrity and functionality of individual components and critical user flows.
+*   **BUILDING FOR PRODUCTION:**
+    *   **Expo:** `npx expo run:ios` or `npx expo run:android` for development builds. For production builds, refer to Expo documentation for `eas build` commands.
+    *   **Purpose:** Generate distributable application artifacts for iOS and Android platforms.
 
 ---
 
-## 5. ARCHITECTURAL & SECURITY PRINCIPLES
+## 5. ARCHITECTURAL & DEVELOPMENT PRINCIPLES
 
-*   **CORE PRINCIPLES:**
-    *   **SOLID:** Adhere strictly to **S**ingle Responsibility, **O**pen/Closed, **L**iskov Substitution, **I**nterface Segregation, and **D**ependency Inversion principles in all code modules.
-    *   **DRY:** **D**on't **R**epeat **Y**ourself. Abstract common logic into reusable functions and components.
-    *   **YAGNI:** **Y**ou **A**ren't **G**onna **N**eed It. Avoid premature optimization or adding features not explicitly required.
-    *   **KISS:** **K**eep **I**t **S**imple, **S**tupid. Favor clear, straightforward solutions over overly complex ones.
-
-*   **SECURITY MANDATES (DECEMBER 2025):**
-    *   **Dependency Vulnerability Scanning:** Integrate **npm audit** or **yarn audit** into CI pipelines. Address critical and high vulnerabilities immediately.
-    *   **Data Protection:** Encrypt sensitive user data at rest and in transit (HTTPS MANDATORY). Be mindful of **OWASP Mobile Top 10** (e.g., insecure data storage, improper platform usage).
-    *   **Authentication & Authorization:** Implement robust, industry-standard authentication (e.g., OAuth 2.0, JWT). Utilize secure session management.
-    *   **Input Validation:** Sanitize and validate ALL user inputs on both the client-side (React Native) and server-side (Node.js/Express.js) to prevent injection attacks (XSS, SQLi).
-    *   **API Security:** Secure all API endpoints (e.g., using rate limiting, API keys where appropriate, CORS policies).
-    *   **Secrets Management:** NEVER hardcode secrets (API keys, database credentials). Use environment variables (`.env` files managed securely, e.g., via Expo secrets or a dedicated secrets manager).
+*   **SOLID:** Ensure adherence to Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion principles in component design.
+*   **DRY (Don't Repeat Yourself):** Abstract common logic into reusable hooks, utility functions, or components.
+*   **YAGNI (You Ain't Gonna Need It):** Implement features based on current, clearly defined requirements. Avoid speculative implementation.
+*   **KISS (Keep It Simple, Stupid):** Favor straightforward solutions over overly complex ones.
+*   **MODULARITY:** Design components and modules for loose coupling and high cohesion.
+*   **STATE MANAGEMENT:** Utilize Signals for predictable and efficient state updates. Manage local component state judiciously and global state strategically.
 
 ---
 
-## 6. DEPLOYMENT & CI/CD
+## 6. SECURITY MANDATES (DECEMBER 2025 UPDATE)
 
-*   **CONTINUOUS INTEGRATION (CI):**
-    *   **Platform:** GitHub Actions.
-    *   **Workflow (`.github/workflows/ci.yml`):** Automate linting, formatting checks (Biome), unit/integration tests (Vitest), and E2E tests (Playwright) on every push or pull request.
-    *   **Code Coverage:** Ensure CI pipeline reports code coverage to Codecov.
-
-*   **CONTINUOUS DEPLOYMENT (CD):**
-    *   **Platform:** GitHub Actions, Expo Application Services (EAS) Build/Submit, or equivalent.
-    *   **Workflow:** Automate builds and deployments to TestFlight/App Store Connect (iOS) and Google Play Store (Android) upon merging to the `main` branch or via manual triggers.
+*   **INPUT VALIDATION:** Rigorously validate all user inputs on both the client-side (React Native) and server-side (Node.js/Express) to prevent injection attacks (XSS, SQLi etc.).
+*   **AUTHENTICATION & AUTHORIZATION:** Securely implement JWT authentication. Ensure token expiry, refresh mechanisms, and proper authorization checks for all sensitive API endpoints.
+*   **DATA PRIVACY:** Adhere to the latest privacy regulations (e.g., GDPR, CCPA). Minimize data collection and ensure secure storage and transmission of sensitive user information.
+*   **DEPENDENCY MANAGEMENT:** Regularly scan and update project dependencies using `npm audit` or `yarn audit` to mitigate known vulnerabilities. Utilize `uv` (if applicable to JS ecosystem for scanning) or equivalent tools for dependency analysis.
+*   **EXPO SECURITY:** Stay updated with Expo's security advisories and best practices, particularly concerning native module usage and build processes.
+*   **COMMUNITY DATA:** For a barter network, ensure mechanisms for reporting abuse, verifying user identities (if applicable), and moderating content are robust and secure.
 
 ---
 
-## 7. CODEBASE STRUCTURE (FEATURE-SLICED DESIGN - FSD)
+## 7. AI INTEGRATION DIRECTIVES (IF APPLICABLE)
 
-*   **ROOT:**
-    *   `.biome.json`
-    *   `biome.lock`
-    *   `tsconfig.json`
-    *   `jest.config.js` (or `vitest.config.ts`)
-    *   `playwright.config.ts`
-    *   `babel.config.js`
-    *   `.env` (for development secrets)
-    *   `package.json`
-    *   `yarn.lock` / `package-lock.json`
-    *   `README.md`
-    *   `AGENTS.md`
-    *   `LICENSE`
-    *   `.gitignore`
-
-*   **SRC/
-    *   `app/` (Entry point for the application)
-        *   `main.tsx` (or `index.js`)
-    *   `processes/` (High-level application logic, orchestrates features)
-        *   `auth/`
-        *   `exchange/`
-        *   `profile/`
-    *   `pages/` (Page-level components, composed of features)
-        *   `HomePage.tsx`
-        *   `ProfilePage.tsx`
-        *   `ExchangeListPage.tsx`
-    *   `widgets/` (Larger, complex components that span multiple features, e.g., headers, footers)
-        *   `HeaderWidget.tsx`
-        *   `FooterWidget.tsx`
-    *   `features/` (Independent application features)
-        *   `auth/` (Login, Signup, Logout)
-            *   `ui/` (UI components for auth)
-            *   `api/` (Auth API calls)
-            *   `model/` (Auth state/logic)
-        *   `exchange/` (Creating, viewing, managing exchanges)
-            *   `ui/`
-            *   `api/`
-            *   `model/`
-        *   `profile/` (User profile management)
-            *   `ui/`
-            *   `api/`
-            *   `model/`
-    *   `entities/` (Core business entities, shared across features)
-        *   `user/`
-        *   `skill/`
-        *   `exchange-offer/`
-    *   `shared/` (Utilities, constants, hooks, types, UI primitives, common components)
-        *   `ui/` (Reusable UI components: Button, Input, Card)
-        *   `hooks/`
-        *   `utils/`
-        *   `types/`
-        *   `constants/`
-    *   `app/` (App-level configuration, navigation, stores)
-        *   `navigation/` (React Navigation setup)
-        *   `store/` (Global state if using a store like Zustand/Jotai)
-
-*   **SERVER/API (Node.js/Express.js - IF SEPARATE MONOREPO OR SUBMODULE):**
-    *   `api/
-        *   `src/`
-            *   `config/`
-            *   `controllers/
-            *   `middleware/
-            *   `models/` (Mongoose schemas)
-            *   `routes/
-            *   `services/
-            *   `utils/
-        *   `server.js`
-        *   `.env`
-        *   `package.json`
+*   **Current Scope:** This repository focuses on a community barter network; AI integration is **not** a primary feature as per the current context. However, if AI functionalities (e.g., intelligent matching, sentiment analysis for reviews) were to be introduced:
+    *   **API Contracts:** Define clear, versioned API contracts between the React Native app and any AI service (e.g., Google Gemini, OpenAI).
+    *   **Asynchronous Operations:** Handle AI service calls asynchronously to prevent blocking the main UI thread.
+    *   **Error Handling:** Implement robust error handling, including graceful degradation and informative user feedback for AI service failures.
+    *   **Cost Management:** Monitor API usage and costs diligently if using third-party AI services.
 
 ---
 
-## 8. APEX AGENT DIRECTIVES FOR `SkillSwap-Community-Skill-Exchange-Mobile-App`
+## 8. AGENTS.MD REPLICATION PROTOCOL
 
-**Project Name:** `SkillSwap-Community-Skill-Exchange-Mobile-App`
-**Repository URL:** `https://github.com/chirag127/SkillSwap-Community-Skill-Exchange-Mobile-App`
-**Primary Language:** TypeScript/JavaScript
-**Framework:** React Native / Expo
-**Backend:** Node.js / Express.js / MongoDB (Assumed based on description)
-**Testing:** Vitest (Unit/Integration), Playwright (E2E)
-**Linting/Formatting:** Biome
-
-*   **TECHNOLOGY STACK CONFIGURATION:**
-    *   **Language:** TypeScript 6.x (Strict Mode enabled). Use JSDoc comments for enhanced documentation.
-    *   **Mobile Framework:** React Native 0.7x+ with Expo 5x.
-    *   **State Management:** Signals (e.g., Preact Signals or similar standardized approach for 2026).
-    *   **UI Framework:** Tailwind CSS v4 for rapid, consistent styling.
-    *   **Backend Framework:** Node.js with Express.js.
-    *   **Database:** MongoDB with Mongoose ODM.
-    *   **Package Manager:** npm or yarn.
-
-*   **ARCHITECTURAL PATTERNS:**
-    *   **Frontend (React Native):** Feature-Sliced Design (FSD).
-    *   **Backend (Node.js):** Modular Monolith or layered architecture (e.g., Controllers, Services, Repositories/Models).
-    *   **Cross-Cutting Concerns:** Implement robust error handling, logging, and security middleware.
-
-*   **VERIFICATION COMMANDS:**
-    *   **Install Dependencies:** `npm install` (or `yarn install`)
-    *   **Lint & Format:** `npx biome check --apply`
-    *   **Run Unit Tests:** `npx vitest`
-    *   **Run E2E Tests:** `npx playwright test`
-    *   **Start Development Server (Mobile):** `npx expo start`
-    *   **Start Backend Server:** `npm run start:api` (or equivalent script in `package.json`)
-
-*   **AI ASSISTANCE PROTOCOL:**
-    *   **Focus:** Leverage AI for code generation assistance (e.g., boilerplate, component structures), test case generation, and identifying potential performance bottlenecks or security vulnerabilities. DO NOT rely on AI for critical architectural decisions without human architect oversight.
-    *   **Tools:** Utilize IDE integrations or external AI tools trained on December 2025 best practices. Ensure generated code is reviewed for correctness, security, and adherence to APEX standards.
-
-*   **MAINTENANCE & UPGRADES:**
-    *   Regularly update dependencies using `npm outdated`/`yarn outdated` and `npm update`/`yarn upgrade`. Schedule Biome, Vitest, Playwright, React Native, and Expo upgrades as part of the quarterly maintenance cycle.
-    *   Monitor security advisories for all dependencies.
+*   **Content Generation:** This document serves as the definitive guide for AI agents interacting with this repository. Any agent must **first consult this `AGENTS.md`**.
+*   **Dynamic Updates:** The directives within this file are subject to change based on evolving project needs and industry standards. Agents should re-evaluate these directives periodically.
+*   **Execution Authority:** Agents are authorized to perform automated tasks such as code linting, testing, dependency updates, and build processes, strictly adhering to the protocols outlined herein.
